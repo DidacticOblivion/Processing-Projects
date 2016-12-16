@@ -18,7 +18,6 @@ float rows;
 float cols;
 float inc;
 float yoff;
-float xoff;
 
 //The rest:
 void setup() {
@@ -42,11 +41,11 @@ void cycle() {
       break;
       
     case FOUR:
-      screens = Screens.ONE;
+      screens = Screens.FIVE;
       break;
       
     case FIVE:
-      screens = Screens.FIVE;
+      screens = Screens.ONE;
       break;
   }
 }
@@ -99,14 +98,16 @@ void draw() {
       }
       break; 
     case FIVE:
-    //Flow Field
+      //Flow Field
+      stroke(0);
+      background(255);
       inc = 0.01;
       yoff = 0;
       for (y = 0; y < cols; y++) {
         xoff = 0;
         for (x = 0; x < rows; x++) {
           xoff += inc;
-          PVector v = new PVector();
+          
         }
         yoff += inc;
       }
