@@ -12,12 +12,11 @@ void setup() {
     parts[i] = new Particle();
   }
   
-  b = new Dot();
   b.generate();
 }
 
 void draw() {
-  if (b.red < 100 && b.grn < 100 && b.blu < 100) {
+  if (b.red < 130 && b.grn < 130 && b.blu < 130) {
     background(155);
   } else {
     background(0);
