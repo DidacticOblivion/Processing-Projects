@@ -17,8 +17,11 @@ void setup() {
 }
 
 void draw() {
-  background(20);
-  b.move();
+  if (b.red < 100 && b.grn < 100 && b.blu < 100) {
+    background(155);
+  } else {
+    background(0);
+  }
   
   if (drawn.size() == parts.length) {
     for (int i = 1; i < drawn.size(); i++) {
@@ -28,12 +31,14 @@ void draw() {
       }
     }
   }
-  parts[i].generate(b.x,b.y,b.D);
+  parts[i].generate(random(b.x,b.x + b.D/3) - b.D/5,random(b.y,b.y + b.D/3) - b.D/5,b.D);
   drawn.add(parts[i]);
   
   for (Particle i : drawn) {
     i.show(b.red,b.grn,b.blu);
   }
+  
+  b.move();
   
   i += 1;
   
