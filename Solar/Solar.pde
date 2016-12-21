@@ -3,7 +3,7 @@ enum Classes {O, B, A, F, G, K, M}
 Star sol = new Star();
 
 void setup() {
-  size(1000,900); 
+  size(1000,700); 
   sol.generate();
 }
 

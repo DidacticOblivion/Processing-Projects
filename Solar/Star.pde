@@ -35,31 +35,31 @@ class Star {
         red = 76;
         grn = 118;
         blu = 255;
-        d = floor(random(20,50));
+        d = floor(random(10,30));
         break;
       case B:
         red = 132;
         grn = 161;
         blu = 255;
-        d = floor(random(20,75));
+        d = floor(random(20,50));
         break;
       case A:
         red = 211;
         grn = 221;
         blu = 255;
-        d = floor(random(75,100));
+        d = floor(random(50,75));
         break;
       case F:
         red = 255;
         grn = 255;
         blu = 255;
-        d = floor(random(80,120));
+        d = floor(random(60,80));
         break;
       case G:
         red = 255;
         grn = 240;
         blu = 130;
-        d = floor(random(75,100));
+        d = floor(random(50,80));
         break;
       case K:
         red = 252;
@@ -71,7 +71,7 @@ class Star {
         red = 255;
         grn = 144;
         blu = 117;
-        d = floor(random(80,130));
+        d = floor(random(90,200));
         break;
     }
     r = map(red, 0, 180, 0, 255);
