@@ -2,9 +2,7 @@ class Planet {
   float d;
   boolean canHaveMoon = false;
   
-  float r = 255;
-  float g = 255;
-  float b = 255;
+  color pColor;
   
   PlanetClasses pClass;
   PlanetTypes pType;
@@ -23,17 +21,13 @@ class Planet {
         select = floor(random(1,2)+ 0.5);
         if (select == 1) {
           pType = PlanetTypes.Planetoid;
-          r = random(135,180);
-          g = 138;
-          b = 104;
-          d = random(10,15);
+          pColor = color(38,random(34),34);
+          d = random(6,10);
         } else {
           pType = PlanetTypes.Mercurian;
           select = floor(random(1,7) + 0.5);
-          r = random(145,190);
-          g = 138;
-          b = 104 - (104 * r/45);
-          d = random(15,20);
+          pColor = color(38,random(9,20),37);
+          d = random(10,20);
           if (select == 5) {
             canHaveMoon = true;
           }
@@ -63,23 +57,32 @@ class Planet {
             canHaveMoon = true;
           }
         }
+        pColor = color(33,random(18,37),44);
         break;
       case Gas:
         select = floor(random(1,2)+ 0.5);
         if (select == 1) {
           pType = PlanetTypes.Neptunian;
-          d = random(80,95);
+          d = random(50,70);
           select = floor(random(1,3) + 0.5);
           if (select >= 2) {
             canHaveMoon = true;
           }
         } else {
           pType = PlanetTypes.Jovian;
-          d = random(95,110);
+          d = random(70,80);
           select = floor(random(1,5) + 0.5);
           if (select >= 3) {
             canHaveMoon = true;
           }
+        }
+        float asdf = floor(random(1,3) + 0.5);
+        if (asdf == 1) {
+          pColor = color(9,random(19,84),66);
+        } else if (asdf == 2) {
+          pColor = color(72,random(28,80),68);
+        } else {
+          pColor = color(204,69,random(47,79));
         }
         break;
     }
@@ -88,8 +91,9 @@ class Planet {
   }
   
   void show(float x, float y) {
-    fill(r,g,b);
-    stroke(r,g,b);
+    colorMode(HSB, 360, 100, 100);
+    fill(pColor);
+    stroke(pColor);
     ellipse(x,y,d,d);
   }
 }

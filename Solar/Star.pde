@@ -9,10 +9,13 @@ class Star {
   private float r;
   private float g;
   private float b;
+  
+  PGraphics star;
    
   StarClasses starClass;
   
   void generate() {
+    //Random Stuff
     int select = floor(random(1, 17)+0.5);
     if (select == 1) {
       starClass = StarClasses.O;
@@ -29,7 +32,7 @@ class Star {
     } else {
       starClass = StarClasses.M;
     }
-    
+    //Choose star class based on random stuff
     switch (starClass) {
       case O:
         red = 76;
@@ -59,49 +62,49 @@ class Star {
         red = 255;
         grn = 240;
         blu = 130;
-        d = floor(random(50,80));
+        d = floor(random(60,100));
         break;
       case K:
         red = 252;
         grn = 177;
         blu = 123;
-        d = floor(random(80,120));
+        d = floor(random(100,175));
         break;
       case M:
         red = 255;
         grn = 144;
         blu = 117;
-        d = floor(random(90,200));
+        d = floor(random(100,250));
         break;
     }
     r = map(red, 0, 180, 0, 255);
     g = map(grn, 0, 180, 0, 255);
     b = map(blu, 0, 180, 0, 255);
     println("Star class: " + starClass);
-  }
-  
-  void show() {
-    noFill();
+    
+    //Generate image
+    star = createGraphics(500,500);
+    star.beginDraw();
+    star.noFill();
     
     float bloom = 200;
     
+    star.strokeWeight(2);
     for (int i = 0; i < bloom; i++) {
-      stroke(map(red - (float)(i/bloom * Math.E) * red,red - (float)(i/bloom * Math.E) * red,255,red - (float)(i/bloom * Math.E) * red,100), 
+      star.stroke(map(red - (float)(i/bloom * Math.E) * red,red - (float)(i/bloom * Math.E) * red,255,red - (float)(i/bloom * Math.E) * red,100), 
             map(grn - (float)(i/bloom * Math.E) * grn,grn - (float)(i/bloom * Math.E) * grn,255,grn - (float)(i/bloom * Math.E) * grn,100), 
             map(blu - (float)(i/bloom * Math.E) * blu,blu - (float)(i/bloom * Math.E) * blu,255,blu - (float)(i/bloom * Math.E) * blu,100));
-      ellipse(0,0,d + i,d + i);
+      star.ellipse(200,200,d + i,d + i);
     }
     
-    strokeWeight(2);
-    stroke(r, g, b);
-    fill(red + 100, grn + 100, blu + 100);
-    ellipse(0,0,d,d);
-    
-    /*for (float i = 0; i <= d; i++) {
-      stroke(map((red - 2 * i/red * red),0,(red - 2 * i/red * red),(red - 2 * i/red * red)/5,(red - 2 * i/red * red)),
-             map((grn - 2 * i/grn * grn),0,(grn - 2 * i/grn * grn),(grn - 2 * i/grn * grn)/5,(grn - 2 * i/grn * grn)), 
-             map((blu - 2 * i/blu * blu),0,(blu - 2 * i/blu * blu),(blu - 2 * i/blu * blu)/5,(blu - 2 * i/blu * blu)));
-      ellipse(0,0,i,i);
-    }*/
+    star.strokeWeight(3);
+    star.stroke(r, g, b);
+    star.fill(red + 100, grn + 100, blu + 100);
+    star.ellipse(200,200,d,d);
+    star.endDraw();
+  }
+  
+  void show() {
+    image(star, -200, -200);
   }
 }
