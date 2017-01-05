@@ -3,10 +3,10 @@ enum PlanetClasses {Minor, Rocky, Gas}
 enum PlanetTypes {Planetoid, Mercurian, Subterran, Terran, Superterran, Neptunian, Jovian}
 
 Star star = new Star();
-Planet[] plnt = new Planet[5];
+Planet[] plnt = new Planet[1];
 
 float[] radius = new float[plnt.length];
-float oSpeed = 2;
+float[] oSpeed = new float[plnt.length];
 
 float[] oStep = new float[plnt.length];
 
@@ -18,6 +18,7 @@ void setup() {
     plnt[i].generate();
     radius[i] = star.d + random(50,200) + plnt[i].d;
     oStep[i] = random((float)(2 * radius[i] * Math.PI));
+    oSpeed[i] = random(1,10);
   }
 }
 
@@ -38,7 +39,10 @@ void draw() {
   star.show();
   
   for (int i = 0; i < plnt.length; i++) {
-    plnt[i].show(); //<-- Make better orbital dynamics!!!
-    oStep[i]++;
+    plnt[i].show(oStep[i], 0); //<-- Make better orbital dynamics!!!
+    oStep[i] += oSpeed[i];
+    if (oStep[i] > 2 * radius[i] * Math.PI) {
+      oStep[i] = 0;
+    }
   }
 }
