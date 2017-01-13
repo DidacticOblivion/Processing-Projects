@@ -2,6 +2,8 @@ planet obit = new planet(100,90,50);
 planet cent = new planet(0,0,70);
 
 boolean top = true;
+float rad;
+float foc;
 
 void setup() {
   size(1000,800);
@@ -18,14 +20,8 @@ void draw() {
   //Orbitting body
   noStroke();
   fill(color(207,96,64));
-  if (!top) {
-    for (int i = (int)-(0.5*(obit.a+obit.b)); i < (int)(0.5*(obit.a+obit.b)); i++) {
-      ellipse(i,round(sqrt((1-(pow(i, 2)/pow(obit.a, 2)))*pow(obit.b, 2))), 2 ,2);
-    }
-  } else {
-    for (int i = (int)(0.5*(obit.a+obit.b)); i > (int)-(0.5*(obit.a+obit.b)); i--) {
-      ellipse(i,round(-sqrt((1-(pow(i, 2)/pow(obit.a, 2)))*pow(obit.b, 2))), 2, 2);
-      top = false;
-    }
-  }
+  foc = sqrt(pow(obit.a, 2) - pow(obit.b, 2));
+  rad = sqrt(pow(obit.x, 2)+pow(obit.y, 2));
+  sqrt(4*((2/obit.a)-(1/rad)));
+  
 }
