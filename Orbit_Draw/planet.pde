@@ -1,11 +1,11 @@
 class planet {
   
-  float x;
-  float y;
+  float x = 0;
+  float y = 0;
   float d;
   
-  float a;
-  float b;
+  float a = 0;
+  float b = 0;
   
   color clr1 = color(random(360),random(30,70),random(40,70));
   color clr2 = color(random(360),random(30,70),random(40,90));
