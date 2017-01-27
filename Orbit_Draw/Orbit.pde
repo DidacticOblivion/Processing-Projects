@@ -1,8 +1,6 @@
-enum Halves {TOP, BOTTOM}
-
 class Orbit {
   
-  Halves half = Halves.BOTTOM;
+  boolean top = true;
   
   float x;
   public float y; //<--- Pull out of orbital velocity equation
@@ -44,25 +42,20 @@ class Orbit {
   }
   
   public void updateOrbit() {
-    switch (half) {
-      case TOP:
-        if (y <= 0 && x < 0) {
-          x = -a;
-          half = Halves.BOTTOM;
-        } else {
-          x = x + -velocity();
-          y = sqrt((1-(pow(x,2)/pow(a,2)))*pow(b,2));
-        }
-        break;
-      case BOTTOM:
-        if (y >= 0 && x > 0) {
-          x = a;
-          half = Halves.TOP;
-        } else {
-          x = x + velocity();
-          y = -sqrt((1-(pow(x,2)/pow(a,2)))*pow(b,2));
-        }
-        break;
+    if (top) {
+      if (x - velocity() >= (float)-a + 0.1) {
+        y = sqrt((1-(pow(x,2)/pow(a,2)))*pow(b,2));
+        x -= velocity();
+      } else {
+        top = false;
+      }
+    } else {
+      if (x + velocity() <= (float)a - 0.1) {
+        y = -sqrt((1-(pow(x,2)/pow(a,2)))*pow(b,2));
+        x += velocity();
+      } else {
+        top = true;
+      }
     }
   }
 }
