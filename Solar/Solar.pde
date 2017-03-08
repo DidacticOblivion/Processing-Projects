@@ -39,10 +39,6 @@ void draw() {
   star.show();
   
   for (int i = 0; i < plnt.length; i++) {
-    plnt[i].show(); //<-- Make better orbital dynamics!!!
-    oStep[i] += oSpeed[i];
-    if (oStep[i] > 2 * radius[i] * Math.PI) {
-      oStep[i] = 0;
-    }
+    plnt[i].show(star.d/2+random(10,100)+plnt[i].d, star.d/2+random(10,100)+plnt[i].d); //<-- Make better orbital dynamics!!!
   }
 }
