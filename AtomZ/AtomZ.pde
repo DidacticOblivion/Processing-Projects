@@ -2,7 +2,7 @@ Atom myAtom;
 Poles[] nodes = new Poles[floor(random(1,8)+0.5)];
 
 public void setup () {
-  myAtom = new Atom("Derponium", 100, new RGBVector(50,225,100));
+  myAtom = new Atom("Derponium", 100);
   
   for (Poles pole : nodes) {
     final float randVar = random(0,1);
@@ -23,6 +23,6 @@ public void setup () {
 public void draw () {
   background(65, 67, 140);
   noStroke();
-  fill(myAtom.clr.r, myAtom.clr.g, myAtom.clr.b);
+  fill(myAtom.clr);
   ellipse(width/2, height/2, myAtom.size, myAtom.size);
 }
