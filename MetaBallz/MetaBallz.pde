@@ -1,8 +1,8 @@
 //Blob b;
-Blob[] blobs = new Blob[5];
+Blob[] blobs = new Blob[floor(random(3,6) + 0.5)];
 
 public void setup() {
-  size(1200,800);
+  size(800,600);
   colorMode(HSB);
   for (int i = 0; i < blobs.length; i++) {
     blobs[i] = new Blob(random(width), random(height));

@@ -1,9 +1,9 @@
 float t = 0;
-float space = 1.5;
+float space = 3;
 int tail = 20;
 boolean invert = true;
-float speed = 0.2;
-int scl = 300;
+float speed = 0.5;
+int scl = 600;
 
 public void setup() {
   size(1200,800);

@@ -1,22 +1,41 @@
-int scl = 5;
+int scl = 30;
 
 int cols;
 int rows;
 
+float noiseScl = 0.5;
+float timeOff = 0;
+float timeScl = 1;
+
 public void setup() {
-  size(1550,1000);
+  noiseScl /= 100;
+  timeScl /= 100;
+  
   background(255);
+  
+  size(600,600);
   
   rows = height / scl;
   cols = width / scl;
 }
 
+void mousePressed() {
+  timeOff = random(-100,100);
+}
+
 public void draw() {
-  for (int i = 0; i < width; i += scl) {
-    for (int j = 0; j < height; j += scl) {
-      stroke(noise(sin(i * j)) * 255);
-      fill(noise(sin(i * j)) * 255);
-      rect(i,j,scl - 1,scl - 1);
+  background(255);
+  for (int y = 0; y < height; y++) {
+    for (int x = 0; x < width; x++) {
+      if (y % scl == 0 && x % scl == 0) {
+        float noiseVal = noise(x * noiseScl, timeOff * timeScl, y * noiseScl);
+        stroke(0);
+        strokeWeight(2);
+        PVector rot = new PVector(scl / 2, scl / 2);
+        rot.rotate(TWO_PI * noiseVal);
+        line(x, y, x + rot.x, y + rot.y);
+      }
     }
   }
+  timeOff++;
 }
