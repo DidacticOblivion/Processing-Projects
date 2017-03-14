@@ -1,13 +1,15 @@
-Particle[] particles = new Particle[100];
+Particle[] particles = new Particle[1000];
+PVector[] flowField;
 
-int scl = 30;
+
+int scl = 100;
 
 int cols;
 int rows;
 
-float noiseScl = 0.5;
+float noiseScl = 2;
 float timeOff = 0;
-float timeScl = 1;
+float timeScl = 0.6;
 
 public void setup() {
   noiseScl /= 100;
@@ -20,30 +22,37 @@ public void setup() {
   rows = height / scl;
   cols = width / scl;
   
+  flowField = new PVector[rows * cols];
+  
   for (int i = 0; i < particles.length; i++) {
     particles[i] = new Particle();
   }
 }
 
-void mousePressed() {
-  timeOff = random(-100,100);
+void mouseClicked() {
+  noLoop();
 }
 
 public void draw() {
-  background(255);
+  //background(255);
   for (int y = 0; y < height; y++) {
     for (int x = 0; x < width; x++) {
       if (y % scl == 0 && x % scl == 0) {
-        float noiseVal = noise(x * noiseScl, timeOff * timeScl, y * noiseScl);
+        float angle = noise(x * noiseScl, timeOff * timeScl, y * noiseScl) * TWO_PI * 4;
+        PVector v = PVector.fromAngle(angle);
+        v.setMag(1);
+        int index = x / scl + y / scl * cols;
+        flowField[constrain(index, 0, cols * rows)] = v;
         stroke(0);
         strokeWeight(2);
-        PVector rot = new PVector(scl / 1.9, scl / 1.9);
-        rot.rotate(TWO_PI * noiseVal);
-        line(x + scl / 2, y + scl / 2, x + rot.x + scl / 2, y + rot.y + scl / 2);
       }
     }
   }
   timeOff++;
-  particles[0].update();
-  particles[0].show();
+  for (Particle i : particles) {
+    i.follow(flowField);
+    i.update();
+    i.edges();
+    i.show();
+  }
 }
