@@ -1,3 +1,5 @@
+Particle[] particles = new Particle[100];
+
 int scl = 30;
 
 int cols;
@@ -17,6 +19,10 @@ public void setup() {
   
   rows = height / scl;
   cols = width / scl;
+  
+  for (int i = 0; i < particles.length; i++) {
+    particles[i] = new Particle();
+  }
 }
 
 void mousePressed() {
@@ -31,11 +37,13 @@ public void draw() {
         float noiseVal = noise(x * noiseScl, timeOff * timeScl, y * noiseScl);
         stroke(0);
         strokeWeight(2);
-        PVector rot = new PVector(scl / 2, scl / 2);
+        PVector rot = new PVector(scl / 1.9, scl / 1.9);
         rot.rotate(TWO_PI * noiseVal);
-        line(x, y, x + rot.x, y + rot.y);
+        line(x + scl / 2, y + scl / 2, x + rot.x + scl / 2, y + rot.y + scl / 2);
       }
     }
   }
   timeOff++;
+  particles[0].update();
+  particles[0].show();
 }
