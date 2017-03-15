@@ -3,7 +3,7 @@ class Particle {
   PVector vel = new PVector(0, 0);
   PVector acc = new PVector(0, 0);
   
-  float darkness = 5;
+  float darkness = 10;
   float maxSpeed = 5;
   
   PVector prevPos = pos.copy();
@@ -23,8 +23,8 @@ class Particle {
     acc.add(f1, f2);
   }
   
-  void show() {
-    stroke(0, darkness);
+  void show(color col) {
+    stroke(col, darkness);
     strokeWeight(1);
     line(pos.x,pos.y,prevPos.x,prevPos.y);
     //point(pos.x, pos.y);
@@ -35,7 +35,7 @@ class Particle {
     int x = floor(pos.x);
     int y = floor(pos.y);
     int index = x / scl + y / scl * cols;
-    PVector force = vect[constrain(index, 0, cols * rows)];
+    PVector force = vect[constrain(index, 0, cols * rows - 1)];
     applyForce(force);
   }
   
