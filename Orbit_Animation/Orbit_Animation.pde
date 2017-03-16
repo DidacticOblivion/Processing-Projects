@@ -1,8 +1,7 @@
 float d = 150;
-Planet plnt = new Planet(150, 5);
-Planet plnt2 = new Planet(300, 1.5);
-Moon mun2 = new Moon(50, 2);
-Moon mun = new Moon(40, -5);
+Planet plnt = new Planet(150, 0.2);
+Planet plnt2 = new Planet(250, 0.05);
+Moon mun = new Moon(40, -0.3);
 
 void setup() {
   size(600,600);
@@ -24,7 +23,4 @@ void draw() {
   translate(plnt.pos.x, plnt.pos.y);
   mun.update();
   mun.show();
-  translate(plnt2.pos.x, plnt2.pos.y);
-  mun2.update();
-  mun2.show();
 }

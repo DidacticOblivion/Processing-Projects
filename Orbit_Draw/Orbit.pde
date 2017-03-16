@@ -3,13 +3,15 @@ class Orbit {
   boolean top = true;
   
   float x;
-  public float y; //<--- Pull out of orbital velocity equation
-  public float a;
-  public float b;
+  float y;
+  float a;
+  float b;
   float h;
   float k;
   float f;
-  public float mu;
+  float mu;
+  
+  float i = 0;
   
   public Orbit(float _x, float _a, float _b, float _h, float _k, float _mu) {
     x = _x;
@@ -42,20 +44,9 @@ class Orbit {
   }
   
   public void updateOrbit() {
-    if (top) {
-      if (x - velocity() >= (float)-a + 0.1) {
-        y = sqrt((1-(pow(x,2)/pow(a,2)))*pow(b,2));
-        x -= velocity();
-      } else {
-        top = false;
-      }
-    } else {
-      if (x + velocity() <= (float)a - 0.1) {
-        y = -sqrt((1-(pow(x,2)/pow(a,2)))*pow(b,2));
-        x += velocity();
-      } else {
-        top = true;
-      }
-    }
+    x = radius() * sin(i);
+    y = radius() * cos(i);
+    
+    i += velocity();
   }
 }

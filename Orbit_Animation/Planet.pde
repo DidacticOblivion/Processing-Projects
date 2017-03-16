@@ -12,9 +12,9 @@ class Planet {
   }
   
   void update() {
-    pos.x = r * cos(oPos * (oSpeed / 100));
-    pos.y = r * sin(oPos * (oSpeed / 100));
-    oPos++;
+    pos.x = r * sin(oPos * oSpeed);
+    pos.y = r * cos(oPos * oSpeed);
+    oPos += 0.1;
   }
   
   void show() {
