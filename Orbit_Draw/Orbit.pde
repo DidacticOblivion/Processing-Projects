@@ -44,9 +44,6 @@ class Orbit {
   }
   
   public void updateOrbit() {
-    x = radius() * sin(i);
-    y = radius() * cos(i);
     
-    i += velocity();
   }
 }
