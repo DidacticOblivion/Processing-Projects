@@ -26,14 +26,7 @@ void draw() {
     }
   }
   updatePixels();
-  for (int i = seeds.length - 1; i > 0; i--) {
-    for (int j = seeds.length - 1; j > 0; j--) {
-      if (dist(seeds[i].pos.x, seeds[i].pos.y, seeds[j].pos.x, seeds[j].pos.y) <= (seeds[i].r + seeds[j].r + 4) && seeds[i] != seeds[j]) {
-        break;
-      } else {
-        seeds[i].grow();
-      }
-    }
+  
     seeds[i].show();
   }
 }
