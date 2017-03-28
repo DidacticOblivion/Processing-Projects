@@ -1,6 +1,8 @@
 class GameBoard {
   
   Piece[] pieces = new Piece[9];
+  int ID = 0;
+  int pID = 0;
   
   PVector pos = new PVector(width/2, height/2);
   color bg;
@@ -24,7 +26,6 @@ class GameBoard {
   void place(Shapes type, int index) {
     if (pieces[index] == null) {
       pieces[index] = new Piece(index, type);
-      //println(index);
     } else {
       println("Spot filled already!");
     }
@@ -77,9 +78,8 @@ class GameBoard {
         sel = 8;
       }
     }
-    println(sel);
     if(pieces[sel] == null) {
-      fill(50,255,30);
+      fill(50,255,30, 100);
     } else {
       fill(200,100,50);
     }
@@ -100,6 +100,18 @@ class GameBoard {
       if(i == 8) {
         reset();
       }
+    }
+    pID = ID;
+  }
+  
+  void delay(long time) {
+    boolean reset = true;
+    long delayTime;
+    if(reset && pID == ID) {
+      delayTime = time + System.currentTimeMillis();
+    }
+    if(delayTime <= System.currentTimeMillis()) {
+      //Break Loop
     }
   }
   

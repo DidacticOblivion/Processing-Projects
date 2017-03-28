@@ -1,10 +1,10 @@
 
-int boardSize = 800;
+int boardSize = 600;
 int scl;
 GameBoard game = new GameBoard();
 
 void setup() {
-  size(800,800);
+  size(600,600);
   scl = boardSize / 3;
   background(game.bg);
 }
