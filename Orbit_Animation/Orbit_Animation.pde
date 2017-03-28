@@ -1,11 +1,15 @@
 float d = 150;
-Planet plnt = new Planet(150, 0.2);
-Planet plnt2 = new Planet(250, 0.05);
-Moon mun = new Moon(40, -0.3);
+
+Planet[] planets = new Planet[floor(random(1, 3) + 0.5)];
 
 void setup() {
   size(600,600);
   colorMode(HSB);
+  
+  for (int i = 0; i < planets.length; i++) {
+    planets[i] = new Planet(random(100, 300), random(0.1, 0.5));
+    planets[i].spawnMoons();
+  }
 }
 
 void draw() {
@@ -16,11 +20,8 @@ void draw() {
   fill(35,255,255);
   ellipse(0, 0, d, d);
   
-  plnt.update();
-  plnt.show();
-  plnt2.update();
-  plnt2.show();
-  translate(plnt.pos.x, plnt.pos.y);
-  mun.update();
-  mun.show();
+  for (Planet p : planets) {
+    p.update();
+    p.show();
+  }
 }

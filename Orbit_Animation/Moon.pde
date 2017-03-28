@@ -4,7 +4,7 @@ class Moon {
   float oSpeed;
   
   float r;
-  float oPos = random(360);
+  float oPos = random(TWO_PI);
   
   Moon(float _r, float _oSpeed) {
     r = _r;
