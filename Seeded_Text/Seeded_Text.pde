@@ -21,12 +21,9 @@ void draw() {
     for (int x = 0; x < width; x++) {
       int index = x + y * width;
       if (pixels[index] > color(100)) {
-        //create bubble
+        pixels[index] = floor(random(255));
       }
     }
   }
   updatePixels();
-  
-    seeds[i].show();
-  }
 }
