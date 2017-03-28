@@ -1,29 +1,109 @@
 class GameBoard {
   
-  PVector gSize = new PVector(1,1);
-  PVector max = new PVector(800,600);
+  Piece[] pieces = new Piece[9];
   
-  void display() {
-    stroke(0);
-    strokeWeight(3);
-    line(width/3, 0, width/3, height);
+  PVector pos = new PVector(width/2, height/2);
+  color bg;
+  color ln;
+  
+  GameBoard() {
+    bg = color(220);
+    ln = color(0);
   }
   
-  void update() {
-    if (gSize.x < max.x) {
-      gSize.lerp(max, 0.2);
+  GameBoard(color bg_) {
+    bg = bg_;
+    ln = color(0);
+  }
+  
+  GameBoard(color bg_, color ln_) {
+    bg = bg_;
+    ln = ln_;
+  }
+  
+  void place(Shapes type, int index) {
+    if (pieces[index] == null) {
+      pieces[index] = new Piece(index, type);
+      //println(index);
     } else {
-      //display();
-      background(255);
-      stroke(0);
-      strokeWeight(3);
-      line(width/3, 0, width/3, height);
+      println("Spot filled already!");
     }
   }
   
   void show() {
+    //Background
+    strokeWeight(scl/30);
+    stroke(ln);
+    fill(bg, 75);
+    for(int i = 0; i < width - 1; i++) {
+      for(int j = 0; j < height - 1; j++) {
+        if(i % scl == 0 && j % scl == 0) {
+          rect(i,j,scl,scl);
+        }
+      }
+    }
+    //Showing Pieces
+    for(Piece p : pieces) {
+      if(p != null) {
+        p.show();
+      }
+    }
+  }
+  
+  void click(float x_, float y_, int btn) {
+    int sel = -1;
+    if(x_ <= scl) {
+      if(y_ <= scl) {
+        sel = 0;
+      } else if(y_ > scl && y_ <= 2 * scl) {
+        sel = 3;
+      } else if(y_ > 2 * scl) {
+        sel = 6;
+      }
+    } else if(x_ > scl && x_ <= 2 * scl) {
+      if(y_ <= scl) {
+        sel = 1;
+      } else if(y_ > scl && y_ <= 2 * scl) {
+        sel = 4;
+      } else if(y_ > 2 * scl) {
+        sel = 7;
+      }
+    } else if(x_ > 2 * scl) {
+      if(y_ <= scl) {
+        sel = 2;
+      } else if(y_ > scl && y_ <= 2 * scl) {
+        sel = 5;
+      } else if(y_ > 2 * scl) {
+        sel = 8;
+      }
+    }
+    println(sel);
+    if(pieces[sel] == null) {
+      fill(50,255,30);
+    } else {
+      fill(200,100,50);
+    }
     noStroke();
-    fill(255);
-    rect(width/2 - gSize.x/2, height/2 - gSize.y/2, gSize.x, gSize.y);
+    rect(getLoc(sel).x - (scl/2), getLoc(sel).y - (scl/2), scl, scl);
+    if(btn == LEFT) {
+      place(Shapes.O, sel);
+    } else {
+      place(Shapes.X, sel);
+    }
+  }
+  
+  void update() {
+    for(int i = 0; i < 9; i++) {
+      if(pieces[i] == null) {
+        break;
+      }
+      if(i == 8) {
+        reset();
+      }
+    }
+  }
+  
+  void reset() {
+    pieces = new Piece[9];
   }
 }
