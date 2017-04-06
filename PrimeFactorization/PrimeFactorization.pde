@@ -1,16 +1,10 @@
 ArrayList<Integer> factors = new ArrayList<Integer>();
 
-int number = 17;//floor(random(-1000000, 1000000) + 0.5);
+int number = 40;
 
 void setup() {
   println("The factors of " + number + " are:");
-  println(factor(number));
-  
-  //ArrayList<Integer> numPri = howManyPrimes(0, 10000);
-  //for (Integer i : numPri) {
-  //  println(i);
-  //}
-  //println("There are " + numPri.size() + " prime numbers in this range.");
+  println(group(factor(number)));
 }
 
 //Factoring Method
@@ -50,6 +44,7 @@ ArrayList<Integer> factor(int n) {
 //Method for ordering factors from least to greatest
 ArrayList<Integer> order(ArrayList<Integer> f) {
   ArrayList<Integer> r = new ArrayList<Integer>();
+  
   while (f.size() > 0) {
     Integer least = f.get(0);
     for (Integer factor : f) {
@@ -64,7 +59,18 @@ ArrayList<Integer> order(ArrayList<Integer> f) {
   return r;
 }
 
-//Method for finding all prime numbers in a range
+//Method for grouping factors with exponents
+ArrayList<String> group(ArrayList<Integer> f) {
+  ArrayList<String> r = new ArrayList<String>();
+  
+  for (Integer fact : f) { // <<<--- Working on grouping right here!!  =====================================================
+    
+  }
+  
+  return r;
+}
+
+//Method for finding all prime numbers in a specified range
 ArrayList<Integer> howManyPrimes(int start, int end) {
   ArrayList<Integer> primes = new ArrayList<Integer>();
   
