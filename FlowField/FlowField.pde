@@ -3,19 +3,19 @@ color[] flowColor = new color[particles.length];
 
 PVector[] flowField;
 
-int scl = 5;
+int scl = 10;
 
 int cols;
 int rows;
 
-float noiseScl = 1;
+float noiseScl = 0.5;
 float timeOff = 0;
 float timeScl = 1;
-float mag = 1.5;
+float mag = 1;
 
 
 ////// Color  Stuff //////
-    boolean makeColored = true;
+    boolean makeColored = false;
     boolean darkBackground = false;
     
     float colorStart = 0;
@@ -54,7 +54,7 @@ void prepGraphics() {
 
 
 void setup() {
-  size(800, 600);
+  size(1200, 720);
   
   noiseScl /= 100;
   timeScl /= 100;
@@ -83,9 +83,18 @@ void mouseClicked() {
 
 
 void keyPressed() {
-  if (key == ' ') {
-    darkBackground = !darkBackground;
-    prepGraphics();
+  switch (key) {
+    case ' ':
+      darkBackground = !darkBackground;
+      prepGraphics();
+      break;
+    case 'c':
+      makeColored = !makeColored;
+      prepGraphics();
+      break;
+    case 'r':
+      prepGraphics();
+      break;
   }
 }
 

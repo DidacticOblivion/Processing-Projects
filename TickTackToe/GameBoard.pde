@@ -97,22 +97,12 @@ class GameBoard {
       if(pieces[i] == null) {
         break;
       }
-      if(i == 8) {
-        reset();
-      }
+    }
+    //Reset Command
+    if (keyPressed && key == 'r') {
+      reset();
     }
     pID = ID;
-  }
-  
-  void delay(long time) {
-    boolean reset = true;
-    long delayTime;
-    if(reset && pID == ID) {
-      delayTime = time + System.currentTimeMillis();
-    }
-    if(delayTime <= System.currentTimeMillis()) {
-      //Break Loop
-    }
   }
   
   void reset() {

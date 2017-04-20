@@ -3,7 +3,7 @@ class Particle {
   PVector vel = new PVector(0, 0);
   PVector acc = new PVector(0, 0);
   
-  float darkness = 10;
+  float darkness = 5;
   float maxSpeed = 5;
   
   PVector prevPos = pos.copy();
