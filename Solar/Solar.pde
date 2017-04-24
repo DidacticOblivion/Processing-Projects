@@ -1,7 +1,3 @@
-enum StarClasses {O, B, A, F, G, K, M} 
-enum PlanetClasses {Minor, Rocky, Gas}
-enum PlanetTypes {Planetoid, Mercurian, Subterran, Terran, Superterran, Neptunian, Jovian}
-
 Star star = new Star();
 Planet[] plnt = new Planet[1];
 

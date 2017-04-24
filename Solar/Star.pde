@@ -1,3 +1,5 @@
+enum StarClasses {O, B, A, F, G, K, M} 
+
 class Star {
   float x;
   float y;

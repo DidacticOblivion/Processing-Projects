@@ -18,8 +18,8 @@ float mag = 1;
     boolean makeColored = false;
     boolean darkBackground = false;
     
-    float colorStart = 0;
-    float colorRange = 360;
+    float colorStart = 100;
+    float colorRange = 200;
 //////End Color Stuff//////
 
 

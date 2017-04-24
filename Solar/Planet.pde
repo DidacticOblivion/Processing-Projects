@@ -1,3 +1,6 @@
+enum PlanetClasses {Minor, Rocky, Gas}
+enum PlanetTypes {Planetoid, Mercurian, Subterran, Terran, Superterran, Neptunian, Jovian}
+
 class Planet {
   float d;
   boolean canHaveMoon = false;
