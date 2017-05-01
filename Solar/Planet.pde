@@ -2,10 +2,22 @@ enum PlanetClasses {Minor, Rocky, Gas}
 enum PlanetTypes {Planetoid, Mercurian, Subterran, Terran, Superterran, Neptunian, Jovian}
 
 class Planet {
-  float d;
-  boolean canHaveMoon = false;
   
+  float d;
   color pColor;
+  boolean canHaveMoon;
+  
+  //Orbital peramiters
+  float r;
+  float step;
+  
+  PVector pos = new PVector();
+  
+  Planet(float _r, float _step) {
+    
+  }
+  
+  
   
   PlanetClasses pClass;
   PlanetTypes pType;
@@ -93,10 +105,15 @@ class Planet {
     println("Moon poosible: " + canHaveMoon);
   }
   
-  void show(float x, float y) {
+  
+  
+  void show() {
+    
+    
     colorMode(HSB, 360, 100, 100);
     fill(pColor);
     stroke(pColor);
-    ellipse(x,y,d,d);
+    
+    ellipse(0,0,d,d);
   }
 }
