@@ -1,7 +1,7 @@
 ColorWheel cw;
 
 void setup() {
-  size(500, 500);
+  size(550, 550);
   background(255);
   
   cw = new ColorWheel(250);
