@@ -15,8 +15,11 @@ void setup() {
 
 void draw() {
   clear();
+  pushMatrix();
+  translate(center.x * 0.1, center.y * 0.1);
   space.show();
-  translate(center.x * 0.9, center.y * 0.9);
+  popMatrix();
+  translate(center.x, center.y);
   scale(zoom);
 
   star.show();
