@@ -3,18 +3,24 @@ Star star;
 PVector center;
 boolean dragging = false;
 
+Background space;
+
 void setup() {
   size(1200, 900);
+  space = new Background(floor(1.1 * width), floor(1.1 * height));
+
   center = new PVector(width / 2, height / 2);
-  background(0);
-  star = new Star(2);
+  star = new Star(5);
 }
 
 void draw() {
-  translate(center.x, center.y);
+  clear();
+  space.show();
+  translate(center.x * 0.9, center.y * 0.9);
   scale(zoom);
-  background(0);
-  
+
+  star.show();
+
   if (mousePressed && dragging) {
     center.x += mouseX - pmouseX;
     center.y += mouseY - pmouseY;
@@ -23,8 +29,6 @@ void draw() {
   } else {
     dragging = false;
   }
-  
-  star.show();
 }
 
 void mousePressed() {
@@ -33,11 +37,11 @@ void mousePressed() {
     star.regen();
     star.regenPlanets();
     break;
-    
+
   case RIGHT:
     dragging = true;
     break;
-    
+
   default:
     break;
   }

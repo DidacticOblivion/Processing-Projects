@@ -9,7 +9,7 @@ class Star {
   float red;
   float grn;
   float blu;
-  
+
   float bloom = 150;
 
   private float r;
@@ -19,11 +19,11 @@ class Star {
   PGraphics star;
 
   ArrayList<Planet> planets = new ArrayList<Planet>();
-  
+
   Star() {
     generate(0);
   }
-  
+
   Star(int n) {
     generate(n);
   }
@@ -114,7 +114,7 @@ class Star {
     star.fill(red + 100, grn + 100, blu + 100);
     star.ellipse(width/2, height/2, radius, radius);
     star.endDraw();
-    
+
     for (int i = 0; i < n; i++) {
       addPlanet();
     }
@@ -126,19 +126,25 @@ class Star {
 
   void show() {
     image(star, -width/2, -height/2);
-    
+
     for (Planet p : planets) {
       p.show();
     }
   }
-  
+
   void addPlanet() {
-    planets.add(new Planet(random(TWO_PI), this));
+    planets.add(new Planet(random(TWO_PI), this, planets));
   }
-  
+
+  void removePlanet() {
+    if (planets.size() > 0) {
+      planets.remove(planets.size() - 1);
+    }
+  }
+
   void regenPlanets() {
     for (Planet p : planets) {
-      p.generate();
+      p.generate(planets);
     }
   }
 }
