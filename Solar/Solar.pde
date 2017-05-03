@@ -1,5 +1,5 @@
 Star star = new Star();
-Planet[] plnt = new Planet[2];
+Planet[] plnt = new Planet[10];
 
 PVector center;
 
