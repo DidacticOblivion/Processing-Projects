@@ -18,9 +18,19 @@ class Star {
 
   PGraphics star;
 
+  ArrayList<Planet> planets = new ArrayList<Planet>();
+  
+  Star() {
+    generate(0);
+  }
+  
+  Star(int n) {
+    generate(n);
+  }
+
   StarClasses starClass;
 
-  void generate() {
+  void generate(int n) {
     //Random Stuff
     int select = floor(random(1, 17)+0.5);
     if (select == 1) {
@@ -104,9 +114,31 @@ class Star {
     star.fill(red + 100, grn + 100, blu + 100);
     star.ellipse(width/2, height/2, radius, radius);
     star.endDraw();
+    
+    for (int i = 0; i < n; i++) {
+      addPlanet();
+    }
+  }
+
+  void regen() {
+    generate(0);
   }
 
   void show() {
     image(star, -width/2, -height/2);
+    
+    for (Planet p : planets) {
+      p.show();
+    }
+  }
+  
+  void addPlanet() {
+    planets.add(new Planet(random(TWO_PI), this));
+  }
+  
+  void regenPlanets() {
+    for (Planet p : planets) {
+      p.generate();
+    }
   }
 }

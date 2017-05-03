@@ -1,27 +1,19 @@
-Star star = new Star();
-Planet[] plnt = new Planet[10];
+Star star;
 
 PVector center;
+boolean dragging = false;
 
 void setup() {
   size(1200, 900);
   center = new PVector(width / 2, height / 2);
   background(0);
-  star.generate();
-  for (int i = 0; i < plnt.length; i++) {
-    plnt[i] = new Planet(random(TWO_PI), star);
-    plnt[i].generate();
-  }
+  star = new Star(2);
 }
 
 void draw() {
   translate(center.x, center.y);
   scale(zoom);
   background(0);
-  star.show();
-  for (Planet p : plnt) {
-    p.show();
-  }
   
   if (mousePressed && dragging) {
     center.x += mouseX - pmouseX;
@@ -31,17 +23,15 @@ void draw() {
   } else {
     dragging = false;
   }
+  
+  star.show();
 }
-
-boolean dragging = false;
 
 void mousePressed() {
   switch (mouseButton) {
   case LEFT:
-    star.generate();
-    for (Planet p : plnt) {
-      p.generate();
-    }
+    star.regen();
+    star.regenPlanets();
     break;
     
   case RIGHT:

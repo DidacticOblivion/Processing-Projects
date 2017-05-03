@@ -18,6 +18,7 @@ class Planet {
   Planet(float _step, Star parent) {
     step = _step;
     parentStar = parent;
+    generate();
   }
   
   
@@ -112,6 +113,7 @@ class Planet {
         }
         break;
     }
+    
     println("Planet type: " + pType);
     println("Moon poosible: " + canHaveMoon);
   }
