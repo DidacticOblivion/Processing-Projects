@@ -15,10 +15,9 @@ class Planet {
   
   PVector pos = new PVector();
   
-  Planet(float _r, float _step, Star parent) {
+  Planet(float _step, Star parent) {
     step = _step;
     parentStar = parent;
-    radius = _r + (parent.radius * 0.5);
   }
   
   
@@ -27,14 +26,21 @@ class Planet {
   PlanetTypes pType;
   
   void generate() {
+    radius = parentStar.radius;
     colorMode(HSB, 360, 100, 200);
     int select = floor(random(1,4) + 0.5);
-    if (select == 1 || select == 4) {
+    if (select == 1) {
       pClass = PlanetClasses.Minor;
+      radius += random(50);
     } else if (select == 2) {
       pClass = PlanetClasses.Rocky;
+      radius += random(50, 100);
     } else if (select == 3) {
       pClass = PlanetClasses.Gas;
+      radius += random(100, 300);
+    } else if (select == 4) {
+      pClass = PlanetClasses.Minor;
+      radius += random(300, 350);
     }
     switch (pClass) {
       case Minor:
@@ -112,6 +118,10 @@ class Planet {
   
   
   
+  float vel() {
+    return sqrt(5 / (radius * radius));
+  }
+  
   void show() {
     float x = 1.5 * radius * cos(step);
     float y = 1.5 * radius * sin(step);
@@ -121,5 +131,7 @@ class Planet {
     stroke(pColor);
     
     ellipse(x,y,d,d);
+    
+    step += vel();
   }
 }
