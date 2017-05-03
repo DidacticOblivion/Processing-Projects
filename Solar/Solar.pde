@@ -1,10 +1,11 @@
 Star star = new Star();
-Planet plnt = new Planet();
+Planet plnt;
 
 void setup() {
   size(1000, 700);
   background(0);
   star.generate();
+  plnt = new Planet(70, 180, star);
   plnt.generate();
 }
 

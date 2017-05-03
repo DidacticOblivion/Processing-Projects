@@ -3,18 +3,22 @@ enum PlanetTypes {Planetoid, Mercurian, Subterran, Terran, Superterran, Neptunia
 
 class Planet {
   
+  Star parentStar;
+  
   float d;
   color pColor;
   boolean canHaveMoon;
   
   //Orbital peramiters
-  float r;
+  float radius;
   float step;
   
   PVector pos = new PVector();
   
-  Planet(float _r, float _step) {
-    
+  Planet(float _r, float _step, Star parent) {
+    step = _step;
+    parentStar = parent;
+    radius = _r + (parent.radius * 0.5);
   }
   
   
@@ -23,6 +27,7 @@ class Planet {
   PlanetTypes pType;
   
   void generate() {
+    colorMode(HSB, 360, 100, 200);
     int select = floor(random(1,4) + 0.5);
     if (select == 1 || select == 4) {
       pClass = PlanetClasses.Minor;
@@ -36,12 +41,12 @@ class Planet {
         select = floor(random(1,2)+ 0.5);
         if (select == 1) {
           pType = PlanetTypes.Planetoid;
-          pColor = color(38,random(34),34);
+          pColor = color(32,random(50),100);
           d = random(6,10);
         } else {
           pType = PlanetTypes.Mercurian;
           select = floor(random(1,7) + 0.5);
-          pColor = color(38,random(9,20),37);
+          pColor = color(random(20,43),random(40),100);
           d = random(10,20);
           if (select == 5) {
             canHaveMoon = true;
@@ -72,7 +77,7 @@ class Planet {
             canHaveMoon = true;
           }
         }
-        pColor = color(33,random(18,37),44);
+        pColor = color(random(30,43),random(10,40),100);
         break;
       case Gas:
         select = floor(random(1,2)+ 0.5);
@@ -91,13 +96,13 @@ class Planet {
             canHaveMoon = true;
           }
         }
-        float asdf = floor(random(1,3) + 0.5);
+        float asdf = floor(random(1, 3) + 0.5);
         if (asdf == 1) {
-          pColor = color(9,random(19,84),66);
+          pColor = color(random(34), random(70, 100), 100);
         } else if (asdf == 2) {
-          pColor = color(72,random(28,80),68);
+          pColor = color(172, random(30, 70), 100);
         } else {
-          pColor = color(204,69,random(47,79));
+          pColor = color(random(190, 246), random(50, 80), 100);
         }
         break;
     }
@@ -108,12 +113,13 @@ class Planet {
   
   
   void show() {
-    
+    float x = 1.5 * radius * cos(step);
+    float y = 1.5 * radius * sin(step);
     
     colorMode(HSB, 360, 100, 100);
     fill(pColor);
     stroke(pColor);
     
-    ellipse(0,0,d,d);
+    ellipse(x,y,d,d);
   }
 }
