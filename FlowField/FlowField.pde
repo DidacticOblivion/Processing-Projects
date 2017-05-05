@@ -55,6 +55,7 @@ void prepGraphics() {
 
 void setup() {
   size(1200, 720);
+  pixelDensity(displayDensity());
   
   noiseScl /= 100;
   timeScl /= 100;
