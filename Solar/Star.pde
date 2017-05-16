@@ -6,6 +6,7 @@ class Star {
   float x;
   float y;
   float radius;
+  float bounds;
   float red;
   float grn;
   float blu;
@@ -93,6 +94,7 @@ class Star {
       radius = floor(random(100, 250));
       break;
     }
+    bounds = radius * 0.75;
     r = map(red, 0, 180, 0, 255);
     g = map(grn, 0, 180, 0, 255);
     b = map(blu, 0, 180, 0, 255);
@@ -101,18 +103,19 @@ class Star {
     //Generate image
     star = createGraphics(width, height);
     star.beginDraw();
+    star.translate(widthH, heightH);
     star.noFill();
 
     star.strokeWeight(3);
     for (int i = 0; i < bloom; i++) {
       star.stroke(red, grn, blu, 100 * (i / bloom));
-      star.ellipse(width/2, height/2, radius + bloom - i, radius + bloom - i);
+      star.ellipse(0, 0, radius + bloom - i, radius + bloom - i);
     }
 
     star.strokeWeight(6);
     star.stroke(r, g, b);
     star.fill(red + 100, grn + 100, blu + 100);
-    star.ellipse(width/2, height/2, radius, radius);
+    star.ellipse(0, 0, radius, radius);
     star.endDraw();
 
     for (int i = 0; i < n; i++) {
@@ -125,7 +128,7 @@ class Star {
   }
 
   void show() {
-    image(star, -width/2, -height/2);
+    image(star, -widthH, -heightH);
 
     for (Planet p : planets) {
       p.show();

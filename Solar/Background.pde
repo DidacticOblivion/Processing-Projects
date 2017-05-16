@@ -15,17 +15,19 @@ class Background {
     bg.noStroke();
     bg.fill(0);
     bg.rect(0, 0, max.x, max.y);
-    for (int i = 0; i < 0.00025 * max.x * max.y; i++) {
-      bg.fill(random(50), 75, 100, 100);
-      bg.ellipse(random(max.x), random(max.y), 2, 2);
-      bg.fill(255, 100);
-      bg.ellipse(random(max.x), random(max.y), 2, 2);
-      bg.ellipse(random(max.x), random(max.y), 2, 2);
+    for (int i = 0; i < 0.0005 * max.x * max.y; i++) {
+      bg.stroke(random(50), 100, 100, 100);
+      bg.strokeWeight(1);
+      bg.point(random(max.x), random(max.y));
+      bg.stroke(255, 100);
+      bg.point(random(max.x), random(max.y));
+      bg.stroke(255, 200);
+      bg.point(random(max.x), random(max.y));
     }
     bg.endDraw();
   }
 
   void show() {
-    image(bg, -max.x * 0.1, -max.y * 0.1);
+    image(bg, -center.x, -center.y);
   }
 }
