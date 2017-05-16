@@ -8,6 +8,7 @@ enum PlanetTypes {
 class Planet {
 
   Star parentStar;
+  ArrayList<Moon> moons = new ArrayList<Moon>();
 
   float d;
   color pColor;
@@ -160,5 +161,15 @@ class Planet {
     ellipse(x, y, d, d);
 
     step += vel();
+  }
+  
+  void addMoon() {
+    moons.add(new Moon());
+  }
+  
+  void removeMoon() {
+    if (moons.size() > 0) {
+      moons.remove(moons.size() - 1);
+    }
   }
 }
