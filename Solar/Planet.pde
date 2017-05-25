@@ -5,7 +5,7 @@ enum PlanetTypes {
   Planetoid, Mercurian, Subterran, Terran, Superterran, Neptunian, Jovian
 }
 
-class Planet {
+class Planet extends OrbitalBody {
 
   Star parentStar;
   ArrayList<Moon> moons = new ArrayList<Moon>();
@@ -15,16 +15,10 @@ class Planet {
   boolean canHaveMoon;
   float gravity;
 
-  //Orbital peramiters
-  float radius;
-  float step;
-
-  PVector pos = new PVector();
-
   Planet(float _step, Star parent, ArrayList<Planet> others) {
     step = _step;
     parentStar = parent;
-    generate(others);
+    generate(others, true);
   }
 
 
@@ -32,7 +26,7 @@ class Planet {
   PlanetClasses pClass;
   PlanetTypes pType;
 
-  void generate(ArrayList<Planet> others) {
+  void generate(ArrayList<Planet> others, boolean initMoons) {
     radius = parentStar.radius;
     colorMode(HSB, 360, 100, 200);
     int select = floor(random(1, 5) + 0.5);
@@ -134,9 +128,16 @@ class Planet {
       if (p != this) {
         if (p.radius != radius && p.radius - p.d - p.gravity > (radius + d) + gravity && p.radius + p.d + p.gravity < (radius - d) - gravity) {
           println("Regenerating Planet");
-          generate(others);
+          generate(others, false);
           break;
         }
+      }
+    }
+
+    if (canHaveMoon && initMoons) {
+      float rand = random(5);
+      for (int i = 0; i < rand; i++) {
+        addMoon();
       }
     }
 
@@ -144,32 +145,33 @@ class Planet {
     println("Moon poosible: " + canHaveMoon);
   }
 
-
-
-  float vel() {
-    return sqrt(5 / (radius * radius));
-  }
-
   void show() {
-    float x = 1.5 * radius * cos(step);
-    float y = 1.5 * radius * sin(step);
-
     colorMode(HSB, 360, 100, 100);
     fill(pColor);
     stroke(pColor);
 
-    ellipse(x, y, d, d);
+    ellipse(parentStar.x + coordinates()[0], parentStar.y + coordinates()[1], d, d);
 
     step += vel();
+
+    for (Moon m : moons) {
+      m.show(pos.x, pos.y);
+    }
   }
-  
+
   void addMoon() {
-    moons.add(new Moon());
+    moons.add(new Moon(this));
   }
-  
+
   void removeMoon() {
     if (moons.size() > 0) {
       moons.remove(moons.size() - 1);
+    }
+  }
+
+  void regenMoons() {
+    for (Moon m : moons) {
+      m.generate();
     }
   }
 }

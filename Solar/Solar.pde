@@ -26,18 +26,9 @@ void setup() {
 void draw() {
   pushMatrix();
   clear();
-<<<<<<< HEAD
 
   translate(center.x, center.y);
   space.show();
-=======
-  pushMatrix();
-  translate(center.x * 0.1, center.y * 0.1);
-  space.show();
-  popMatrix();
-  translate(center.x, center.y);
-  scale(zoom);
->>>>>>> origin/master
 
   scale(zoom);
   star.show();

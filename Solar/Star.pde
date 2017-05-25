@@ -147,7 +147,8 @@ class Star {
 
   void regenPlanets() {
     for (Planet p : planets) {
-      p.generate(planets);
+      p.generate(planets, false);
+      p.regenMoons();
     }
   }
 }
