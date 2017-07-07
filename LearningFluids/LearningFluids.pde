@@ -1,11 +1,11 @@
 float scl = 20;
 
-FluidPoint[] FPs = new FluidPoint[500];
+FluidPoint[] FPs = new FluidPoint[200];
 
 int mForceRange = 200;
 
 void setup() {
-  size(1200, 800);
+  size(800,600);
   createGrid();
 
   for (int i = 0; i < FPs.length; i++) {
@@ -16,12 +16,13 @@ void setup() {
 
 
 void draw() {
-  createGrid();
+  //createGrid();
+  background(0,255,0);
   
   noFill();
   stroke(100, 200, 200, 100);
   strokeWeight(5);
-  ellipse(mouseX, mouseY, 2 * mForceRange, 2 * mForceRange);
+  //ellipse(mouseX, mouseY, 2 * mForceRange, 2 * mForceRange);
 
   for (FluidPoint fp : FPs) {
     fp.update();
