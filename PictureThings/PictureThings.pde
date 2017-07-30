@@ -1,15 +1,22 @@
 PImage img;
 int scl = 20;
 
+PVector minCorners;
+PVector maxCorners;
+
 void setup() {
   size(1200, 800);
-  img = loadImage("Supporting/owl.jpg");
-  img.resize(1200,800);
-  background(0);
-  //image(img, 0, 0);
+  img = loadImage("Supporting/wide.jpg");
+  img = imageToBackground(img);
   
-  for (int y = 0; y < height; y++) {
-    for (int x = 0; x < width; x++) {
+  minCorners = new PVector(width / 2 - img.width / 2, height / 2 - img.height / 2);
+  maxCorners = new PVector(width / 2 + img.width / 2, height / 2 + img.height / 2);
+  
+  background(0);
+  image(img, minCorners.x, minCorners.y);
+  
+  for (int y = (int)minCorners.y; y < maxCorners.y; y++) {
+    for (int x = (int)minCorners.x - 1; x < maxCorners.x; x++) {
       if (y % scl == 0 && x % scl == 0) {
         blurEllipse(x, y);
       }
@@ -17,7 +24,24 @@ void setup() {
   }
 }
 
+
+PImage imageToBackground(PImage i) {
+  float imgRatio = i.width / i.height;
+  float bgRatio = width / height;
+  
+  if (imgRatio >= bgRatio) {
+    i.resize(1200, floor(imgRatio / i.height));
+  } else {
+    i.resize(floor(imgRatio * i.width), 800);
+  }
+  
+  return i;
+}
+
+
 void blurEllipse(float x_, float y_) {
+  x_ -= minCorners.x - 1;
+  y_ -= minCorners.y - 1;
   int hueSum = 0;
   int satSum = 0;
   int brightSum = 0;
@@ -25,9 +49,14 @@ void blurEllipse(float x_, float y_) {
   for (int i = (int)x_; i < x_ + scl; i++) {
     for (int j = (int)y_; j < y_ + scl; j++) {
       int index = j * img.width + i;
-      hueSum += hue(img.pixels[index]);
-      satSum += saturation(img.pixels[index]);
-      brightSum += brightness(img.pixels[index]);
+      try {
+        hueSum += hue(img.pixels[index]);
+        satSum += saturation(img.pixels[index]);
+        brightSum += brightness(img.pixels[index]);
+      } catch(Exception e) {
+        println("Exception Occured: " + e);
+        println("pixels.length = " + img.pixels.length);
+      }
     }
   }
   hueSum /= scl * scl;
