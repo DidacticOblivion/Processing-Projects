@@ -1,9 +1,0 @@
-
-
-class Perceptron {
-  
-  Perceptron() {
-    
-  }
-  
-}

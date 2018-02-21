@@ -1,6 +1,7 @@
 Star star;
 
 boolean showDebug = false;
+boolean showStars = true;
 float widthH, heightH;
 
 PVector center;
@@ -10,7 +11,7 @@ Background space;
 
 void setup() {
   frameRate(30);
-  size(1200, 900);
+  size(1200, 700);
 
   widthH = width / 2;
   heightH = height / 2;
@@ -26,13 +27,18 @@ void setup() {
 void draw() {
   pushMatrix();
   clear();
-
+  
   translate(center.x, center.y);
-  space.show();
-
+  
+  if (showStars) {
+    space.show();
+  } else {
+    background(0);
+  }
+  
   scale(zoom);
   star.show();
-
+  
   if (mousePressed && dragging) {
     center.x += mouseX - pmouseX;
     center.y += mouseY - pmouseY;
@@ -42,7 +48,7 @@ void draw() {
     dragging = false;
   }
   popMatrix();
-
+  
   //Debug
   if (showDebug) {
     noStroke();
@@ -78,6 +84,11 @@ void keyPressed() {
   case 'r':
     center = new PVector(widthH, heightH);
     zoom = 1;
+    
+  case 's':
+    showStars = !showStars;
+    break;
+    
   default:
     break;
   }
@@ -88,6 +99,7 @@ void keyPressed() {
     star.regenPlanets();
     space.generate();
     break;
+    
   default:
     break;
   }
@@ -97,6 +109,6 @@ float zoom = 1;
 
 void mouseWheel(MouseEvent event) {
   float e = -event.getCount();
-  zoom += e / 10;
-  zoom = constrain(zoom, 0.1, 1);
+  zoom += e / 50;
+  zoom = constrain(zoom, 0.05, 1);
 }

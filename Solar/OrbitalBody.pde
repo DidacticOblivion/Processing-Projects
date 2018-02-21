@@ -1,5 +1,4 @@
 abstract class OrbitalBody {
-  PVector pos = new PVector();
   float radius;
   float step;
 
@@ -7,11 +6,10 @@ abstract class OrbitalBody {
     return sqrt(5 / (radius * radius));
   }
 
-  float[] coordinates() {
-    float[] coords = new float[2];
-    coords[0] = (1.5 * radius * cos(step)); 
-    coords[1] = (1.5 * radius * sin(step));
-
-    return coords;
+  PVector pos() {
+     return new PVector(
+                     (1.5 * radius * cos(step)), 
+                     (1.5 * radius * sin(step))
+                     );
   }
 }

@@ -29,6 +29,7 @@ class Planet extends OrbitalBody {
   void generate(ArrayList<Planet> others, boolean initMoons) {
     radius = parentStar.radius;
     colorMode(HSB, 360, 100, 200);
+    
     int select = floor(random(1, 5) + 0.5);
     if (select == 1) {
       pClass = PlanetClasses.Minor;
@@ -128,7 +129,7 @@ class Planet extends OrbitalBody {
       if (p != this) {
         if (p.radius != radius && p.radius - p.d - p.gravity > (radius + d) + gravity && p.radius + p.d + p.gravity < (radius - d) - gravity) {
           println("Regenerating Planet");
-          generate(others, false);
+          generate(others, true);
           break;
         }
       }
@@ -150,12 +151,12 @@ class Planet extends OrbitalBody {
     fill(pColor);
     stroke(pColor);
 
-    ellipse(parentStar.x + coordinates()[0], parentStar.y + coordinates()[1], d, d);
+    ellipse(parentStar.x + pos().x, parentStar.y + pos().y, d, d);
 
     step += vel();
 
     for (Moon m : moons) {
-      m.show(pos.x, pos.y);
+      m.show(pos().x + m.pos().x, pos().y + m.pos().y);
     }
   }
 
