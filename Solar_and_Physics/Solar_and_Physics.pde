@@ -4,7 +4,7 @@ void setup() {
   size(1200, 700);
   background(0);
   
-  o = new Orbit(width / 2, height / 2, 500, 300);
+  o = new Orbit(width / 2 - 200, height / 2, 500, 100);
 }
 
 

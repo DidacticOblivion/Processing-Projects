@@ -18,6 +18,15 @@ void draw() {
   game.update();
 }
 
+//Check win states for each piece
+int gameState() {
+  if () {
+    
+  } else {
+    return -1;
+  }
+}
+
 PVector getLoc(int index) {
   PVector rVar = new PVector();
   switch(index) {

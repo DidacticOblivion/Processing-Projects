@@ -1,3 +1,9 @@
+enum WinStates {
+  TOPH("123"), CENTERH("456"), BOTTOMH("789"),
+  LEFTV("147"), CENTERV("258"), RIGHTV("369"),
+  DIAGF("357"), DIAGB("159")
+}
+
 class GameBoard {
   
   Piece[] pieces = new Piece[9];

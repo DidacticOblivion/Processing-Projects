@@ -11,12 +11,11 @@ class Orbit {
   
   
   Orbit(int x, int y, int maj, int min) {
+    foc = new PVector(-sqrt(pow(a, 2) - pow(b, 2)) + x, y);
     pCoords = new PVector(x, y);
     
     a = maj;
     b = min;
-    
-    foc = new PVector(-sqrt(pow(a, 2) - pow(b, 2)) + x, y);
   }
   
   float x(float s) {
